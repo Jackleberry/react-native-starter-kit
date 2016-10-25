@@ -20,7 +20,7 @@ export function login(data) {
         // dispatch(setCurrentUser(jwt.decode(token)));
         dispatch(setCurrentUser({
           name: username,
-          email: email
+          email
         }));
       }
     ).catch(
@@ -31,7 +31,7 @@ export function login(data) {
           }
         }
 
-        throw(["Failed to Login. " + err]);
+        throw(["Failed to Login. " + err.toString()]);
       }
     );
   };
@@ -41,14 +41,14 @@ export function facebookLogin(data) {
   return dispatch => {
     return axios.post(`${url}/auth/facebook`, data).then(
       res => {
-        const { token, username, email, name, id } = res.data;
+        const { token, username, email, name } = res.data;
         console.log("Setting token in async Storage: ", token);
         AsyncStorage.setItem("@StarterKit:jwtToken", token);
         setAuthorizationToken(token);
         // dispatch(setCurrentUser(jwt.decode(token)));
         dispatch(setCurrentUser({
-          name: name,
-          email: email
+          name: name || username,
+          email
         }));
       }
     ).catch(
@@ -77,7 +77,7 @@ export function signup(data) {
         setAuthorizationToken(token);
         dispatch(setCurrentUser({
           name: username,
-          email: email
+          email
         }));
       }
     ).catch(

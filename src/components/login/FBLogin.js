@@ -39,7 +39,9 @@ class FBLogin extends Component {
                     console.log(error);
                   } else {
                     console.log(result);
-                    _this.props.facebookLogin(result);
+                    _this.props.facebookLogin(result).catch(err => {
+
+                    });
                   }
                 },
               );
