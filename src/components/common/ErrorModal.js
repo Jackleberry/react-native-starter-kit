@@ -25,6 +25,7 @@ class MyModal extends Component {
                   name='ios-close-circle'
                   type='ionicon'
                   color='#00B233'
+                  underlayColor='transparent'
                   onPress={this.props.onClose}
                 />
               </View>

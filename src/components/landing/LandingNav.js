@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
-import Login from './Login';
+import LandingPage from './LandingPage';
 import navigationBar from 'HSNavBar'
 
-const initialRoute = {component: Login, name: 'initial', title: 'Welcome'};
+const initialRoute = {component: LandingPage, name: 'landing', title: 'Landing'};
 
-class LoginNav extends Component {
+class LandingNav extends Component {
 
   constructor () {
     super();
@@ -30,4 +30,4 @@ class LoginNav extends Component {
   }
 }
 
-export default LoginNav
+export default LandingNav

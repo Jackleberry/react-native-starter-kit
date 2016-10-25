@@ -3,6 +3,7 @@ export default {
   auth: {
     checkedCredentials: false,
     isAuthenticated: false,
+    isAuthenticating: false,
     user: {}
   }
 };

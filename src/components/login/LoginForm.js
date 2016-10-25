@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, StyleSheet, View, Modal, TouchableHighlight } from 'react-native';
-import colors from 'HSColors'
+import colors from 'HSColors';
 import mainStyles from '../../styles/styles';
-import { Icon } from 'react-native-elements'
-import { Button, FormInput } from 'react-native-elements'
+import { Button } from 'react-native-elements'
 import { connect } from 'react-redux';
-import { signup } from '../../actions/auth';
+import { login } from '../../actions/auth';
 import ValidateInput from '../../validations/login';
 import isEmpty from 'lodash/isEmpty';
 import ErrorModal from '../common/ErrorModal';
+import SpecialFormInput from '../common/SpecialFormInput';
 
 class FormLogin extends Component {
 
@@ -42,9 +42,12 @@ class FormLogin extends Component {
 
   onSubmit() {
     if (this.isValid()) {
-      this.props.signup(this.state).then(
-        res => {console.log('success')},
-        err => {console.log('failure')}
+      this.props.login(this.state).then(
+        res => {console.log('Login Success')},
+        err => {
+          console.log('Login Failure');
+          this.setState({ errors: err });
+        }
       );
     } else {
       console.log(this.state.errors);
@@ -61,15 +64,17 @@ class FormLogin extends Component {
             visible={!isEmpty(this.state.errors)}
           />
 
-          <FormInput
+          <SpecialFormInput
             containerStyle={styles.formInput}
             onChangeText={this.onUsernameChangeText.bind(this)}
-            placeholder='Username / Email' />
-          <FormInput
+            placeholder='Username / Email'
+            iconName="user"/>
+          <SpecialFormInput
             containerStyle={styles.formInput}
             onChangeText={this.onPasswordChangeText.bind(this)}
             placeholder='Password'
-            secureTextEntry={true}/>
+            secureTextEntry={true}
+            iconName="lock"/>
           <Button
             small
             onPress={this.onSubmit.bind(this)}
@@ -81,7 +86,7 @@ class FormLogin extends Component {
   }
 }
 
-export default connect(null, { signup })(FormLogin);
+export default connect(null, { login })(FormLogin);
 
 const styles = StyleSheet.create({
   formContainer: {

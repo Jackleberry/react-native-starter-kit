@@ -53,8 +53,12 @@ class FormLogin extends Component {
   onSubmit() {
     if (this.isValid()) {
       this.props.signup(this.state).then(
-        res => {console.log('success')},
-        err => {console.log('failure')}
+        res => {console.log('Sign Up Success')}
+      ).catch(
+        err => {
+          console.log('Sign Up Failure');
+          this.setState({ errors: err });
+        }
       );
     }
   }

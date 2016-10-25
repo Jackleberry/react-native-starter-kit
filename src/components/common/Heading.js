@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { Text, ScrollView, StyleSheet, View } from 'react-native';
-import { Icon } from 'react-native-elements'
-import colors from 'HSColors'
+import { Icon } from 'react-native-elements';
+import colors from 'HSColors';
 
 class Heading extends Component {
 
@@ -19,7 +19,6 @@ export default Heading;
 
 const styles = StyleSheet.create({
   headingContainer: {
-    marginTop: 60,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 40,

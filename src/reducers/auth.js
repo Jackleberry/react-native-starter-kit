@@ -7,9 +7,15 @@ export default (state = {}, action) => {
         return {
           checkedCredentials: true,
           isAuthenticated: !isEmpty(action.user),
+          isAuthenticating: false,
           user: action.user
         };
-        default:
-            return state;
+      case types.SET_AUTHENTICATING:
+        return {
+          ...state,
+          isAuthenticating: action.isAuthenticating
+        };
+      default:
+          return state;
     }
 };

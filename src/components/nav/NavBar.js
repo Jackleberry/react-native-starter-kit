@@ -3,19 +3,36 @@
  */
 
 import React from 'react';
-import { Platform, Navigator, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Platform, Navigator, StyleSheet, TouchableHighlight } from 'react-native';
 import NavTitleComponent from 'HSNavTitleComponent';
 import NavTitleIcon from 'HSNavTitleIcon';
 import colors from 'HSColors';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { Icon } from 'react-native-elements'
+
 import CancelButton from 'HSCancelButton';
+import { SearchBar } from 'react-native-elements';
+import HSStyles from 'HSStyles';
 
 let styles = {};
 
 const NavigationBar = (toggleSideMenu) => {
   const src = require('image!logo')
   const LeftButton = (route, navigator, index, navState) => {
-    if (route.name !== 'initial') {
+    if (route.name === 'landing') {
+      return (
+        <TouchableHighlight
+          style={{marginTop: 7, marginLeft: 9}}
+          onPress={toggleSideMenu}
+          underlayColor='transparent'>
+          <MaterialIcon
+            color='white'
+            name='menu'
+            size={28}
+          />
+        </TouchableHighlight>
+      );
+    } else if (route.name !== 'initial') {
       return (
         <CancelButton onPress={() => {
           navigator.pop();
@@ -28,27 +45,27 @@ const NavigationBar = (toggleSideMenu) => {
       const leftAction = navigator.pop;
       const leftIcon = 'chevron-left';
       return (
-        <Icon
+        <MaterialIcon
           onPress={leftAction}
           name={leftIcon} size={28} />
       )
     }
-    return (
-      <TouchableHighlight
-        style={{marginTop: 7, marginLeft: 9}}
-        onPress={toggleSideMenu}
-        underlayColor='transparent'>
-        <Icon
-          color='white'
-          name='menu'
-          size={28}
-        />
-      </TouchableHighlight>
-    )
   };
 
-  const RightButton = (/* route, navigator, index, navState */) => {
-    return null;
+  const RightButton = (route, navigator, index, navState) => {
+    if (route.name === 'landing') {
+      return (
+        <Icon
+          onPress={() => console.log("cog pressed")}
+          type="font-awesome"
+          containerStyle={{padding: 7}}
+          name="cogs"
+          color="white"
+          underlayColor='transparent'/>
+      );
+    } else {
+      return null;
+    }
   };
 
   const Title = (route, navigator, index, navState) => {

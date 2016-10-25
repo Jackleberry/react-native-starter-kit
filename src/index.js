@@ -4,7 +4,7 @@ import App from './components/App';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 // import jwt from 'react-native-jwt';
-import { setAuthorizationToken } from './utils/setAuthorizationToken';
+import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setCurrentUser } from './actions/auth';
 
 export default function init() {
@@ -15,6 +15,7 @@ export default function init() {
 
     componentWillMount() {
       setTimeout(() => AsyncStorage.getItem('@StarterKit:jwtToken').then(value => {
+        console.log("Did I find jwt token? ", value);
         if (value) {
           // store.dispatch(setCurrentUser(jwt.decode(value)));
           store.dispatch(setCurrentUser({
@@ -26,8 +27,6 @@ export default function init() {
           store.dispatch(setCurrentUser({}));
           setAuthorizationToken(false);
         }
-      }).catch(err => {
-        store.dispatch(setCurrentUser(false));
       }), 10);
     }
 
